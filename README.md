@@ -1,5 +1,3 @@
-TESTE
-
 ![](https://psicc.unb.br/wp-content/uploads/2023/07/logounb.fw_-2048x174.png)
 DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO\
 DISCIPLINA DE SEGURANÇA DA COMPUTACIONAL- 2024.2
@@ -184,7 +182,7 @@ Isso iniciará o servidor e exibirá uma mensagem confirmando sua execução:
 Servidor HTTPS rodando em https://localhost:4443
 ```
 
-Agora o servidor está ouvindo conexões seguras na porta 4443.
+Agora o servidor está com conexões seguras na porta 4443.
 
 
 ### **Acessando o Servidor pelo Navegador**
@@ -199,37 +197,47 @@ Agora o servidor está ouvindo conexões seguras na porta 4443.
 
 ### **Instalação do OpenSSL**
 
-Para instalar o OpenSSL em sistemas baseados em Linux (Ubuntu/Debian), utilize:
-
-```sh
-sudo apt update && sudo apt install openssl
+Instalando o OpenSSL no site https://slproweb.com/products/Win32OpenSSL.html e baixe a versão "Win64 OpenSSL v3.4.1 Light":
+- Com o OpenSSL instalado, abrimos o programa pelo com terminal Wind64 próprio:
+- Digitamos o comando abaixo, no diretório onde está implementado o servidor, para verificar a criação dos certificados na etapa anterior:
 ```
-
-Para verificar se a instalação foi bem-sucedida, execute:
-
-```sh
-openssl version
+openssl x509 -in cert.pem -text -noout
 ```
-
-Se o OpenSSL estiver instalado corretamente, ele retornará a versão do software.
+[IMAGEM]
 
 ### **Wireshark: Analisando o Tráfego TLS**
 
-O Wireshark é uma ferramenta de análise de pacotes que permite inspecionar o tráfego TLS do servidor HTTPS. Para instalar:
+Para analisar o tráfego TLS utilizando o Wireshark, siga as instruções abaixo:
 
-```sh
-sudo apt update && sudo apt install wireshark
-```
+#### **Instalação do Wireshark**
 
-Durante a instalação, selecione **Sim** para permitir que usuários não-root capturem pacotes.
+1. Acesse o site oficial do Wireshark: [https://www.wireshark.org/download.html](https://www.wireshark.org/download.html).
+2. Baixe a versão apropriada para o seu sistema operacional (Windows, macOS, Linux).
+3. Siga as instruções de instalação fornecidas pelo instalador.
 
-Para verificar a instalação:
+#### **Capturando o Tráfego TLS na Porta 4443**
 
-```sh
-wireshark --version
-```
+1. Abra o Wireshark.
+2. Na tela inicial, selecione a interface de rede que está sendo utilizada para a comunicação (por exemplo, Ethernet ou Wi-Fi).
+3. Clique em "Start" para iniciar a captura de pacotes.
+4. No campo de filtro, digite `tcp.port == 4443` para filtrar apenas o tráfego na porta 4443.
+5. Acesse o servidor HTTPS configurado anteriormente em `https://localhost:4443` através do navegador.
+6. Realize algumas interações com o servidor para gerar tráfego TLS.
 
-Essas etapas garantem que o servidor está configurado corretamente e que a comunicação segura está funcionando.
+#### **Analisando o Handshake TLS**
+
+1. No Wireshark, pare a captura clicando no botão "Stop".
+2. Procure por pacotes que contenham "Client Hello" e "Server Hello" no campo "Info". Esses pacotes fazem parte do handshake TLS.
+3. Clique em um pacote "Client Hello" para visualizar os detalhes do handshake, incluindo as versões de TLS suportadas e as cifras criptográficas.
+4. Clique em um pacote "Server Hello" para ver a resposta do servidor, incluindo a cifra selecionada e o certificado digital.
+
+#### **Verificando a Comunicação Criptografada**
+
+1. Após o handshake, observe os pacotes de "Application Data". Esses pacotes contêm dados criptografados trocados entre o cliente e o servidor.
+2. Para verificar a integridade e confidencialidade dos dados, observe que o conteúdo dos pacotes de "Application Data" não é legível, indicando que a comunicação está criptografada.
+
+Utilizando o Wireshark, é possível visualizar e analisar o processo de handshake TLS e a comunicação criptografada, garantindo que o servidor HTTPS está funcionando corretamente e que os dados transmitidos estão protegidos.
+
 
 ---
 
