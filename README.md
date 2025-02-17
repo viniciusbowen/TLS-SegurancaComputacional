@@ -1,12 +1,12 @@
 ![UNIVERSIDADE DE BRASÍLIA](https://psicc.unb.br/wp-content/uploads/2023/07/logounb.fw_-2048x174.png)
 
-DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO
-DISCIPLINA DE SEGURANÇA DA COMPUTAÇÃO
+DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO\
+DISCIPLINA DE SEGURANÇA DA COMPUTAÇÃO\
 
-# TRABALHO PRÁTICO 2 - protocolo HTTPS over TLS
+# TRABALHO PRÁTICO 2 - protocol HTTPS over TLS
 
-_MEMBROS:VINÍCIUS BOWEN - 180079239_
-_RAMON OLIBEIRA - 242039630_
+_MEMBROS:VINÍCIUS BOWEN - 180079239_\
+_RAMON OLIVEIRA - 242039630_\
 
 # **Sumário**
 
@@ -32,11 +32,11 @@ _RAMON OLIBEIRA - 242039630_
 
 # **Abstract: Implementação do Servidor e Cliente HTTPS**
 
-A segurança na comunicação entre cliente e servidor é um dos principais desafios no desenvolvimento de aplicações web. O protocolo HTTPS (HyperText Transfer Protocol Secure) surge como uma solução essencial, garantindo confidencialidade, integridade e autenticidade dos dados transmitidos. Para compreender melhor seu funcionamento, este relatório apresenta a implementação de um servidor e cliente HTTPS utilizando a linguagem Python, explorando bibliotecas como `http.server`, `ssl` e `cryptography`. Além da implementação prática, são descritas estratégias de validação e testes da comunicação segura, utilizando ferramentas como OpenSSL e Wireshark.
+A segurança na comunicação entre cliente e servidor é um dos principais desafios no desenvolvimento de aplicações web. O protocolo HTTPS (HyperText Transfer Protocol Secure) surge como uma solução garantindo confidencialidade, integridade e autenticidade dos dados transmitidos. Para compreender melhor seu funcionamento, este relatório apresenta a implementação de um servidor e cliente HTTPS utilizando a linguagem Python, explorando bibliotecas como `http.server`, `ssl` e `cryptography`. Além da implementação prática, são descritas estratégias de validação e testes da comunicação segura, utilizando ferramentas como OpenSSL e Wireshark.
 
-# **1. Introdução conceitual: Pesquisa e Detalhamento dos Protocolos de Segurança**
+# **1. Introdução: Pesquisa dos Protocolos de Segurança**
 
-## **1.1. Introdução ao HTTPS, SSL e TLS**
+## **1.1. Detalhamento do HTTPS, SSL e TLS**
 
 ## **SSL (Secure Sockets Layer) e TLS (Transport Layer Security)**
 
@@ -56,7 +56,7 @@ Os principais objetivos desses protocolos são:
 
 1. **Criptografia**: Usa algoritmos como AES (Advanced Encryption Standard), ChaCha20 e 3DES para criptografar os dados transmitidos.
 2. **Autenticação**: Certificados digitais X.509 são utilizados para autenticar a identidade do servidor e, opcionalmente, do cliente.
-3. **Troca de Chaves**: Utiliza o algoritmo Diffie-Hellman, ECDHE (Elliptic Curve Diffie-Hellman Ephemeral) ou RSA para estabelecer uma chave de sessão segura.
+3. **Troca de Chaves**: Utiliza o algoritmo Diffie-Hellman, ECDHE (Elliptic Curve Diffie-Hellman Ephemeral) ou RSA para estabelecer uma chave de sessão segura. Essa troca de chave pode sofrer um "padding" utilizando uma técnica como o OEAP.
 4. **Integridade dos Dados**: Funções hash como SHA-256 garantem que os dados não foram modificados durante a transmissão.
 
 ### **Resumo das Versões e Evolução**
@@ -71,14 +71,7 @@ Os principais objetivos desses protocolos são:
 
 ## **1.2. HTTPS (HyperText Transfer Protocol Secure)**
 
-O HTTPS é a versão segura do HTTP, utilizando SSL ou TLS para criptografar a comunicação entre o navegador e o servidor. Esse protocolo garante que os dados transmitidos sejam confidenciais e íntegros, protegendo contra ataques de interceptação e manipulação.
-
-### **Objetivos e Funcionalidades Gerais**
-
-- **Criptografia**: Utiliza os mesmos algoritmos de criptografia do SSL/TLS, como AES e SHA-256.
-- **Autenticação**: Utiliza certificados digitais para autenticar a identidade do servidor.
-- **Troca de Chaves**: Usa algoritmos como Diffie-Hellman e ECDHE para estabelecer uma chave de sessão segura.
-- **Integridade dos Dados**: Funções de hash garantem que os dados não sejam alterados durante a transmissão.
+O HTTPS é a versão segura do HTTP, utilizando SSL ou TLS para criptografar a comunicação entre o navegador e o servidor. Esse protocolo garante que os dados transmitidos sejam confidenciais e íntegros, protegendo contra ataques de interceptação e manipulação, como os ataques Man in the Middle. Atualmente, mais de 80% dos sites na web utilizam TLS para garantir a segurança das comunicações. O protocolo HTTPS utiliza algoritmos de criptografia robustos, como RSA, para assegurar que apenas o destinatário pretendido possa ler a mensagem, mantendo a privacidade e a integridade dos dados transmitidos.
 
 O HTTPS evoluiu junto com os protocolos SSL e TLS, adotando as melhorias de cada versão para oferecer mais segurança e desempenho.
 
@@ -102,13 +95,9 @@ Para implementar um servidor e cliente HTTPS, utilizaremos **Python** com as bib
 - `http.server` e `ssl` para criar o servidor HTTPS.
 - `requests` e `socket` para implementar o cliente HTTPS.
 - `cryptography` para geração de certificados SSL/TLS via código.
+- `datetime`: Usado para definir o período de validade do certificado.
 
 ## **2.3. Implementação Prática e Explicação do Código**
-
-### **Importação das Bibliotecas**
-- `http.server` e `ssl`: Usadas para criar o servidor HTTPS e aplicar criptografia na comunicação.
-- `cryptography`: Biblioteca que permite gerar certificados e chaves criptográficas diretamente em Python.
-- `datetime`: Usado para definir o período de validade do certificado.
 
 Aqui está a implementação do servidor HTTPS em Python:
 
@@ -226,7 +215,6 @@ wireshark --version
 
 Essas etapas garantem que o servidor está configurado corretamente e que a comunicação segura está funcionando.
 
-
 ---
 
 # **2.5. Preenchimento dos Campos do Certificado**
@@ -247,4 +235,3 @@ Esses campos são utilizados para validar a identidade da entidade ao estabelece
 # **3. Conclusão e Análise Final**
 
 A implementação do HTTPS melhora significativamente a segurança das aplicações web, garantindo a confidencialidade, integridade e autenticidade dos dados. Apesar dos desafios na configuração e implementação, o uso de certificados autoassinados permitiu um entendimento mais aprofundado sobre a criptografia na web. Futuramente, melhorias como a integração com autoridades certificadoras podem ser exploradas para aumentar a confiabilidade da solução.
-
