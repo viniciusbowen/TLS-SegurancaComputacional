@@ -33,8 +33,10 @@ for filename, data in [("key.pem", key.private_bytes(
 server_address = ('localhost', 4443)
 httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
 
-# Aplica o certificado SSL ao servidor
-httpd.socket = ssl.wrap_socket(httpd.socket, certfile="cert.pem", keyfile="key.pem", server_side=True)
+# Configura o contexto SSL
+context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+context.load_cert_chain(certfile="cert.pem", keyfile="key.pem")
+httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
 
 print("Servidor HTTPS rodando em https://localhost:4443")
 httpd.serve_forever()
