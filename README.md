@@ -156,6 +156,21 @@ httpd.serve_forever()
 ```
 2.3. Implementação Prática e Explicação do Código
 
+### **Instalação da Biblioteca `cryptography`**
+
+Para instalar a biblioteca `cryptography` necessária para a geração de certificados SSL/TLS, execute o seguinte comando no terminal:
+
+```sh
+pip install cryptography
+```
+
+### **Sobre a Biblioteca `cryptography`**
+
+A biblioteca `cryptography` é uma ferramenta robusta para a implementação de criptografia em Python. Ela oferece uma ampla gama de algoritmos criptográficos, incluindo RSA abordado anteriorimente no seminário da disciplina, que é um dos métodos mais utilizados para a criptografia de chave pública. A `cryptography` é essencial para a geração de certificados SSL/TLS, que são fundamentais para estabelecer conexões seguras entre clientes e servidores.
+
+### **Geração dos Arquivos `cert.pem` e `key.pem`**
+
+No código fornecido, a biblioteca `cryptography` é utilizada para gerar uma chave privada RSA e um certificado autoassinado. A chave privada é salva no arquivo `key.pem`, enquanto o certificado é salvo no arquivo `cert.pem`. Esses arquivos são usados pelo servidor HTTPS para criptografar a comunicação e autenticar sua identidade.
 
 ### **Compilação e Execução do Código**
 
@@ -172,6 +187,7 @@ Servidor HTTPS rodando em https://localhost:4443
 ```
 
 Agora o servidor está ouvindo conexões seguras na porta 4443.
+
 
 ### **Acessando o Servidor pelo Navegador**
 
