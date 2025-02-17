@@ -1,4 +1,4 @@
-[UNIVERSIDADE DE BRASÍLIA]( link público https:// com imagem do logotipo da universidade de Brasília)
+![UNIVERSIDADE DE BRASÍLIA](https://psicc.unb.br/wp-content/uploads/2023/07/logounb.fw_-2048x174.png)
 
 DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO
 DISCIPLINA DE SEGURANÇA DA COMPUTAÇÃO
