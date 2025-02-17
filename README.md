@@ -1,11 +1,13 @@
-![UNIVERSIDADE DE BRASÍLIA](https://psicc.unb.br/wp-content/uploads/2023/07/logounb.fw_-2048x174.png)
+TESTE
 
+![](https://psicc.unb.br/wp-content/uploads/2023/07/logounb.fw_-2048x174.png)
 DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO\
-DISCIPLINA DE SEGURANÇA DA COMPUTAÇÃO
+DISCIPLINA DE SEGURANÇA DA COMPUTACIONAL- 2024.2
+
 
 # TRABALHO PRÁTICO 2 - protocol HTTPS over TLS
-
-_MEMBROS:VINÍCIUS BOWEN - 180079239_\
+MEMBROS:\
+_VINÍCIUS BOWEN - 180079239_\
 _RAMON OLIVEIRA - 242039630_\
 
 ---
@@ -43,13 +45,9 @@ A segurança na comunicação entre cliente e servidor é um dos principais desa
 ## **SSL (Secure Sockets Layer) e TLS (Transport Layer Security)**
 
 O SSL e seu sucessor, TLS, são protocolos essenciais para garantir a segurança das comunicações na internet. Eles utilizam criptografia para proteger dados transmitidos entre clientes e servidores, impedindo que terceiros acessem informações sensíveis como senhas e dados financeiros.
-
-### **Objetivos e Funcionalidades Gerais**
-
-O SSL foi desenvolvido para garantir a segurança das comunicações na internet, criptografando os dados transmitidos entre um navegador e um servidor. O TLS surgiu como sua evolução, aprimorando a segurança e corrigindo vulnerabilidades.
+O TLS surgiu como sua evolução, aprimorando a segurança e corrigindo vulnerabilidades.
 
 Os principais objetivos desses protocolos são:
-
 - **Confidencialidade**: Utilizam criptografia simétrica e assimétrica para evitar que os dados sejam interceptados.
 - **Autenticação**: Certificados digitais asseguram que o servidor (e, em alguns casos, o cliente) é legítimo.
 - **Integridade dos Dados**: Algoritmos de hash garantem que os dados não foram alterados durante a transmissão.
