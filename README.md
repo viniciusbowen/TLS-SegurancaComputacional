@@ -1,12 +1,14 @@
 ![UNIVERSIDADE DE BRASÍLIA](https://psicc.unb.br/wp-content/uploads/2023/07/logounb.fw_-2048x174.png)
 
 DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO\
-DISCIPLINA DE SEGURANÇA DA COMPUTAÇÃO\
+DISCIPLINA DE SEGURANÇA DA COMPUTAÇÃO
 
 # TRABALHO PRÁTICO 2 - protocol HTTPS over TLS
 
 _MEMBROS:VINÍCIUS BOWEN - 180079239_\
 _RAMON OLIVEIRA - 242039630_\
+
+---
 
 # **Sumário**
 
@@ -99,7 +101,7 @@ Para implementar um servidor e cliente HTTPS, utilizaremos **Python** com as bib
 
 ## **2.3. Implementação Prática e Explicação do Código**
 
-Aqui está a implementação do servidor HTTPS em Python:
+A seguir, mostramos a implementação do servidor HTTPS em Python:
 
 ```python
 import http.server
@@ -115,10 +117,10 @@ key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
 # Cria um certificado autoassinado válido por 1 ano
 subject = issuer = x509.Name([
     x509.NameAttribute(x509.NameOID.COUNTRY_NAME, "BR"),
-    x509.NameAttribute(x509.NameOID.STATE_OR_PROVINCE_NAME, "São Paulo"),
-    x509.NameAttribute(x509.NameOID.LOCALITY_NAME, "São Paulo"),
-    x509.NameAttribute(x509.NameOID.ORGANIZATION_NAME, "Minha Empresa"),
-    x509.NameAttribute(x509.NameOID.COMMON_NAME, "localhost"),
+    x509.NameAttribute(x509.NameOID.STATE_OR_PROVINCE_NAME, "Distrito Federal"),
+    x509.NameAttribute(x509.NameOID.LOCALITY_NAME, "Brasília"),
+    x509.NameAttribute(x509.NameOID.ORGANIZATION_NAME, "Universidade de Brasília"),
+    x509.NameAttribute(x509.NameOID.COMMON_NAME, "sti.unb.br"),
 ])
 cert = (
     x509.CertificateBuilder()
@@ -173,13 +175,13 @@ Agora o servidor está ouvindo conexões seguras na porta 4443.
 
 ### **Acessando o Servidor pelo Navegador**
 
-Abra um navegador e acesse: `https://localhost:4443`
+1. Abra um navegador e acesse: `https://localhost:4443`
 
-Como o certificado é autoassinado, o navegador exibirá um aviso de segurança.
+2.Como o certificado é autoassinado, o navegador exibirá um aviso de segurança.
 
-Clique em **Avançado** e prossiga para o site.
+3. Clique em **Avançado** e prossiga para o site.
 
-O servidor retornará a resposta HTTP segura configurada no código.
+4. O servidor retornará a resposta HTTP segura configurada no código.
 
 ### **Instalação do OpenSSL**
 
@@ -219,16 +221,20 @@ Essas etapas garantem que o servidor está configurado corretamente e que a comu
 
 # **2.5. Preenchimento dos Campos do Certificado**
 
+[IMAGEM DO CERTIFICADO PRINT DA TELA DO NAVEGADOR]
+
 Ao criar um certificado digital, diversos campos podem ser preenchidos para garantir a correta identificação da entidade proprietária do certificado. Esses campos são essenciais para assegurar autenticidade e confiança na comunicação segura. Abaixo, explicamos os principais campos e sua importância:
 
 - **C = Country (País)** → Indica o país onde a organização ou entidade está registrada. Exemplo: `BR` para Brasil.
-- **ST = State/Province (Estado ou Província)** → Especifica o estado ou província dentro do país. Exemplo: `São Paulo`.
-- **L = Locality (Cidade ou Localidade)** → Define a cidade onde a entidade está localizada. Exemplo: `São Paulo`.
-- **O = Organization (Organização)** → Nome da empresa ou entidade proprietária do certificado. Exemplo: `Minha Empresa`.
+- **ST = State/Province (Estado ou Província)** → Especifica o estado ou província dentro do país. Exemplo: `Distrito Federal`.
+- **L = Locality (Cidade ou Localidade)** → Define a cidade onde a entidade está localizada. Exemplo: `Brasília`.
+- **O = Organization (Organização)** → Nome da empresa ou entidade proprietária do certificado. Exemplo: `Universidade de Brasília`.
 - **OU = Organizational Unit (Unidade Organizacional)** → Usado para definir um departamento dentro da organização. Exemplo: `TI`.
-- **CN = Common Name (Nome Comum)** → Define o domínio ou nome da entidade que usará o certificado. Exemplo: `localhost` ou `meusite.com`.
+- **CN = Common Name (Nome Comum)** → Define o domínio ou nome da entidade que usará o certificado. Exemplo: `localhost` ou `sti.unb.br`.
 
-Esses campos são utilizados para validar a identidade da entidade ao estabelecer uma conexão segura. Em ambientes de produção, os certificados são emitidos por Autoridades Certificadoras (CAs) confiáveis, garantindo a autenticidade dos dados transmitidos.
+Como este é um trabalho da disciplina de segurança computacional, o certificado gerado não é válido para HTTPS em um ambiente real. Para que um certificado seja considerado válido, ele deve ser emitido por uma Autoridade Certificadora (CA) confiável, como a ICP-Brasil no Brasil ou a DigiCert internacionalmente. Cada navegador vem de fábrica com uma lista de autoridades certificadoras confiáveis e verifica a autenticidade do certificado através do protocolo TLS. Isso garante que o site acessado pelo usuário é certificado e que o tráfego é criptografado utilizando TLS e RSA, assegurando a confidencialidade e integridade dos dados transmitidos.
+
+Os certificados TLS são fundamentais para a segurança na web. Eles são usados para estabelecer conexões seguras entre clientes e servidores, garantindo que os dados transmitidos sejam criptografados e protegidos contra interceptações. Um certificado TLS contém informações sobre a identidade do servidor, a chave pública usada para criptografia e a assinatura digital da CA que emitiu o certificado. Quando um navegador se conecta a um site HTTPS, ele verifica o certificado apresentado pelo servidor contra a lista de CAs confiáveis. Se o certificado for válido, a conexão segura é estabelecida, permitindo a troca de dados de forma segura e protegida.
 
 ---
 
