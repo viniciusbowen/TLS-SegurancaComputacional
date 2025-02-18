@@ -9,28 +9,6 @@ _RAMON OLIVEIRA - 242039630_\
 
 ---
 
-# **Sumário**
-
-1. **Pesquisa e Detalhamento dos Protocolos de Segurança**\
-   1.1. Introdução ao HTTPS, SSL e TLS\
-   1.2. Objetivos e funcionalidades dos protocolos\
-   1.3. Processos de criptografia, autenticação e troca de chaves\
-   1.4. Evolução das versões e comparação entre elas
-
-2. **Implementação do Servidor e Cliente HTTPS**\
-   2.1. Visão geral da arquitetura cliente/servidor\
-   2.2. Utilização do OpenSSL e outras bibliotecas de segurança\
-   2.3. Implementação prática e explicação do código\
-   2.4. Testes e análise de comunicação segura\
-   2.5. Preenchimento dos Campos do Certificado
-
-3. **Conclusão e Análise Final**\
-   3.1. Impacto dos protocolos na segurança da web\
-   3.2. Benefícios e limitações da implementação\
-   3.3. Possíveis melhorias e extensões
-
----
-
 # **Abstract: Implementação do Servidor e Cliente HTTPS**
 
 A segurança na comunicação entre cliente e servidor é um dos principais desafios no desenvolvimento de aplicações web. O protocolo HTTPS (HyperText Transfer Protocol Secure) surge como uma solução garantindo confidencialidade, integridade e autenticidade dos dados transmitidos. Para compreender melhor seu funcionamento, este relatório apresenta a implementação de um servidor e cliente HTTPS utilizando a linguagem Python, explorando bibliotecas como `http.server`, `ssl` e `cryptography`. Além da implementação prática, são descritas estratégias de validação e testes da comunicação segura, utilizando ferramentas como OpenSSL e Wireshark.
