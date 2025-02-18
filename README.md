@@ -5,17 +5,39 @@ DISCIPLINA DE SEGURANÇA DA COMPUTACIONAL- 2024.2
 # TRABALHO PRÁTICO 2 - protocol HTTPS over TLS
 MEMBROS:\
 _VINÍCIUS BOWEN - 180079239_\
-_RAMON OLIVEIRA - 242039630_\
+RAMON OLIVEIRA - 242039630
 
 ---
 
-# **Abstract: Implementação do Servidor e Cliente HTTPS**
+# Sumário
+*   Apresentação do projeto e objetivo
+*   Pesquisa dos Protocolos de Segurança
+*   Implementação do Servidor e Cliente HTTPS
+*   Conclusão e Análise Final
+*   Referências Bibliográficas
 
-A segurança na comunicação entre cliente e servidor é um dos principais desafios no desenvolvimento de aplicações web. O protocolo HTTPS (HyperText Transfer Protocol Secure) surge como uma solução garantindo confidencialidade, integridade e autenticidade dos dados transmitidos. Para compreender melhor seu funcionamento, este relatório apresenta a implementação de um servidor e cliente HTTPS utilizando a linguagem Python, explorando bibliotecas como `http.server`, `ssl` e `cryptography`. Além da implementação prática, são descritas estratégias de validação e testes da comunicação segura, utilizando ferramentas como OpenSSL e Wireshark.
 
-# **1. Introdução: Pesquisa dos Protocolos de Segurança**
+# **1. Apresentação do projeto e objetivo**
 
-## **1.1. Detalhamento do HTTPS, SSL e TLS**
+O objetivo deste trabalho nasce da necessidade de demonstrar o funcionamento dos conceitos aprendidos durante o curso da disciplina "CIC0201 - SEGURANÇA COMPUTACIONAL", com ênfase nos protocolos TLS e HTTPS. Dessa forma, este projeto tem como foco a implementação de um servidor e cliente HTTPS, explorando a utilização de certificados digitais e criptografia TLS para garantir a segurança das comunicações.
+
+Para isso, foi realizada a implementação de um servidor HTTPS em Python, utilizando certificados autoassinados e bibliotecas como http.server, ssl e cryptography. O sistema garante a proteção dos dados transmitidos através da troca de chaves seguras e cifragem das mensagens.
+
+Ao longo da implementação, são abordados conceitos fundamentais como a geração de certificados X.509, a estrutura do handshake TLS e a análise do tráfego HTTPS utilizando Wireshark.
+
+O fluxo de funcionamento do HTTPS segue as etapas abaixo:
+
+*   Geração de Chaves e Certificado: Cria-se um par de chaves pública e privada, além de um certificado digital autoassinado.
+
+*   Estabelecimento de Conexão Segura: O cliente acessa o servidor HTTPS, que responde com seu certificado digital.
+
+*   Verificação do Certificado: O cliente verifica a autenticidade do certificado e inicia a troca de chaves seguras.
+
+*   Transmissão de Dados Criptografados: As mensagens são cifradas, garantindo a integridade e confidencialidade da comunicação.
+
+# **2. Pesquisa dos Protocolos de Segurança**
+
+## **2.1. Detalhamento do HTTPS, SSL e TLS**
 
 ### **SSL (Secure Sockets Layer) e TLS (Transport Layer Security)**
 
@@ -36,14 +58,14 @@ Os principais objetivos desses protocolos são:
 ### **Resumo das Versões e Evolução**
 
 - **SSL 1.0**: Nunca foi lançado publicamente devido a falhas de segurança.
-- **SSL 2.0**: Lançado em 1995, mas rapidamente substituído devido a vulnerabilidades.
-- **SSL 3.0**: Lançado em 1996, trouxe melhorias, mas foi considerado inseguro com o tempo.
+- **SSL 2.0** (1995): Rapidamente substituído devido a vulnerabilidades.
+- **SSL 3.0** (1996): Trouxe melhorias, mas foi considerado inseguro com o tempo.
 - **TLS 1.0** (1999): Primeira versão do TLS, substituiu o SSL 3.0.
 - **TLS 1.1** (2006): Melhorou a segurança contra ataques de injeção de pacotes.
 - **TLS 1.2** (2008): Introduziu novos algoritmos de criptografia e hash mais seguros.
 - **TLS 1.3** (2018): Tornou o handshake mais eficiente e removeu algoritmos inseguros.
 
-## **1.2. HTTPS (HyperText Transfer Protocol Secure)**
+## **2.2. HTTPS (HyperText Transfer Protocol Secure)**
 
 O HTTPS é a versão segura do HTTP, utilizando SSL ou TLS para criptografar a comunicação entre o navegador e o servidor. Esse protocolo garante que os dados transmitidos sejam confidenciais e íntegros, protegendo contra ataques de interceptação e manipulação, como os ataques Man in the Middle. Atualmente, mais de 80% dos sites na web utilizam TLS para garantir a segurança das comunicações. O protocolo HTTPS utiliza algoritmos de criptografia robustos, como RSA, para assegurar que apenas o destinatário pretendido possa ler a mensagem, mantendo a privacidade e a integridade dos dados transmitidos.
 
@@ -51,8 +73,8 @@ O HTTPS evoluiu junto com os protocolos SSL e TLS, adotando as melhorias de cada
 
 ---
 
-# **2. Implementação do Servidor e Cliente HTTPS**
-## **2.1. Visão Geral da Arquitetura Cliente/Servidor**
+# **3. Implementação do Servidor e Cliente HTTPS**
+## **3.1. Visão Geral da Arquitetura Cliente/Servidor**
 
 A comunicação segura entre um cliente e um servidor HTTPS envolve a troca de informações criptografadas utilizando o protocolo TLS. O fluxo básico dessa comunicação é:
 
@@ -62,18 +84,20 @@ A comunicação segura entre um cliente e um servidor HTTPS envolve a troca de i
 4. O cliente e o servidor realizam um handshake TLS para troca de chaves seguras.
 5. A comunicação entre cliente e servidor ocorre de forma criptografada.
 
-## **2.2. Utilização do OpenSSL e Outras Bibliotecas de Segurança**
+## **3.2. Utilização do OpenSSL e Outras Bibliotecas de Segurança**
 
-Para implementar um servidor e cliente HTTPS, utilizaremos **Python** com as bibliotecas:
+Para implementar um servidor e cliente HTTPS, utilizaremos **Python** com as seguintes bibliotecas:
 
 - `http.server` e `ssl` para criar o servidor HTTPS.
 - `requests` e `socket` para implementar o cliente HTTPS.
 - `cryptography` para geração de certificados SSL/TLS via código.
 - `datetime`: Usado para definir o período de validade do certificado.
 
-## **2.3. Implementação Prática e Explicação do Código**
+E com relação ao seu versionamneto, utilizaremos o padrão disponível no Python 3.12
 
-A seguir, mostramos a implementação do servidor HTTPS em Python:
+## **3.3. Implementação Prática e Explicação do Código**
+
+Abaixo, buscamos demonstrar o código desenvolvido. Para facilitar a explicação, as linhas possuem comentários descrevendo as suas respectivas funcionalidades.
 
 ```python
 import http.server
@@ -86,17 +110,19 @@ import datetime
 # Gera uma chave privada RSA de 2048 bits
 key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
 
-# Cria um certificado autoassinado válido por 1 ano
+# Abaixo, estaremos criando um certificado autoassinado válido por 1 ano, usando o padrão do X.509
+# Para isso, vamos obedecer o seguinte formato na hora de preenchê-lo:
+# País, Estado, Cidade, Organização, Unidade Organizacional e Nome Comum (domínio)
 subject = issuer = x509.Name([
-    x509.NameAttribute(x509.NameOID.COUNTRY_NAME, "BR"),  # País
-    x509.NameAttribute(x509.NameOID.STATE_OR_PROVINCE_NAME, "Distrito Federal"),  # Estado
-    x509.NameAttribute(x509.NameOID.LOCALITY_NAME, "Brasília"),  # Cidade
-    x509.NameAttribute(x509.NameOID.ORGANIZATION_NAME, "Universidade de Brasília"),  # Organização
-    x509.NameAttribute(x509.NameOID.ORGANIZATIONAL_UNIT_NAME, "STI"),  # Unidade Organizacional
-    x509.NameAttribute(x509.NameOID.COMMON_NAME, "sti.unb.br"),  # Nome Comum (domínio)
+    x509.NameAttribute(x509.NameOID.COUNTRY_NAME, "BR"), 
+    x509.NameAttribute(x509.NameOID.STATE_OR_PROVINCE_NAME, "Distrito Federal"),
+    x509.NameAttribute(x509.NameOID.LOCALITY_NAME, "Brasília"),
+    x509.NameAttribute(x509.NameOID.ORGANIZATION_NAME, "Universidade de Brasília"),
+    x509.NameAttribute(x509.NameOID.ORGANIZATIONAL_UNIT_NAME, "STI"),
+    x509.NameAttribute(x509.NameOID.COMMON_NAME, "sti.unb.br"),
 ])
 
-# Constrói o certificado com as informações fornecidas
+# Constrói o certificado com as informações fornecidas na etapa anterior
 cert = (
     x509.CertificateBuilder()
     .subject_name(subject)  # Define o nome do sujeito
@@ -117,25 +143,26 @@ for filename, data in [("key.pem", key.private_bytes(
     with open(filename, "wb") as f:
         f.write(data)  # Escreve os dados no arquivo
 
-# Configura o servidor HTTPS
-server_address = ('localhost', 4443)  # Define o endereço do servidor (localhost) e a porta (4443)
-httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)  # Cria o servidor HTTP
+# Agora, de modo mais simplificado, vamos configurar nosso servidor HTTPS
+# Para isso, é um processo relativamente simples, bastando definir o endereço do servidor (localhost) e a porta (4443)
+server_address = ('localhost', 4443)
+httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
 
-# Configura o contexto SSL
-context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)  # Cria um contexto SSL para o servidor
+# Continuamente, abaixo vamos configurar o nosso SSL, criando o seu respectivo contexto para o servidor:
+context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER) 
 context.load_cert_chain(certfile="cert.pem", keyfile="key.pem")  # Carrega o certificado e a chave privada
 
-# Envolve o socket do servidor com o contexto SSL
+# Definindo o socket utilizado
 httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
 
-# Inicia o servidor HTTPS
+# Por fim, vamos começar a rodar o servidor HTTPS criado
 print("Servidor HTTPS rodando em https://localhost:4443")
-httpd.serve_forever()  # Mantém o servidor rodando indefinidamente
+httpd.serve_forever()
 ```
 
 ### **Instalação da Biblioteca `cryptography`**
 
-Para instalar a biblioteca `cryptography` necessária para a geração de certificados SSL/TLS, execute o seguinte comando no terminal:
+Para instalar a biblioteca `cryptography`, execute o seguinte comando no terminal:
 
 ```sh
 pip install cryptography
@@ -143,15 +170,15 @@ pip install cryptography
 
 ### **Sobre a Biblioteca `cryptography`**
 
-A biblioteca `cryptography` é uma ferramenta robusta para a implementação de criptografia em Python. Ela oferece uma ampla gama de algoritmos criptográficos, incluindo RSA abordado anteriorimente no seminário da disciplina, que é um dos métodos mais utilizados para a criptografia de chave pública. A `cryptography` é essencial para a geração de certificados SSL/TLS, que são fundamentais para estabelecer conexões seguras entre clientes e servidores.
+A `cryptography` é uma ferramenta robusta para a implementação de criptografia em Python, pois ela oferece uma ampla gama de algoritmos criptográficos, incluindo RSA abordado anteriormente no seminário da disciplina, que é um dos métodos mais utilizados para a criptografia de chave pública. A `cryptography` é essencial para a geração de certificados SSL/TLS, que são fundamentais para estabelecer conexões seguras entre clientes e servidores.
 
 ### **Geração dos Arquivos `cert.pem` e `key.pem`**
 
-No código fornecido, a biblioteca `cryptography` é utilizada para gerar uma chave privada RSA e um certificado autoassinado. A chave privada é salva no arquivo `key.pem`, enquanto o certificado é salvo no arquivo `cert.pem`. Esses arquivos são usados pelo servidor HTTPS para criptografar a comunicação e autenticar sua identidade.
+No código fornecido, a `cryptography` é utilizada para gerar uma chave privada RSA e um certificado autoassinado. A chave privada é salva no arquivo `key.pem`, enquanto o certificado é salvo no arquivo `cert.pem`. Esses arquivos são usados pelo servidor HTTPS para criptografar a comunicação e autenticar sua identidade.
 
 ### **Compilação e Execução do Código**
 
-Para rodar o servidor HTTPS, execute o seguinte comando no terminal dentro do diretório onde o script Python está salvo:
+Para rodar o servidor HTTPS, é necessário executar o seguinte comando no terminal dentro do diretório onde o script Python está salvo:
 
 ```sh
 python trabalho2-Segurança.py
@@ -239,7 +266,7 @@ Conclusão:
 
 ---
 
-# **2.5. Preenchimento dos Campos do Certificado**
+# **3.5. Preenchimento dos Campos do Certificado**
 
 ![image](https://github.com/user-attachments/assets/ceac4377-38f5-40b1-9855-9049e2f5f68a)
 ![image](https://github.com/user-attachments/assets/bc0d719c-491a-4ce0-80bd-a94b68b92cd5)
@@ -269,11 +296,20 @@ Os certificados TLS são fundamentais para a segurança na web. Eles são usados
 
 ---
 
-# **3. Conclusão e Análise Final**
+# **4. Conclusão e Análise Final**
 
-A implementação do HTTPS melhora significativamente a segurança das aplicações web, garantindo a confidencialidade, integridade e autenticidade dos dados. Apesar dos desafios na configuração e implementação, o uso de certificados autoassinados permitiu um entendimento mais aprofundado sobre a criptografia na web. Futuramente, melhorias como a integração com autoridades certificadoras podem ser exploradas para aumentar a confiabilidade da solução.
+Por fim, podemos concluir que o trabalho realizado no decorrer desses arquivos foi essencial para consolidar os conhecimentos adquiridos na disciplina de Segurança Computacional, permitindo uma compreensão prática dos protocolos TLS e HTTPS. Implementar um servidor e cliente HTTPS não só ajudou a reforçar os conceitos de criptografia e autenticação, mas também evidenciou a importância desses mecanismos para a segurança na web.
+
+Através do uso de certificados digitais, chaves criptográficas e análise de tráfego com Wireshark, conseguimos visualizar como os dados são protegidos contra ataques e acessos indevidos. Esse tipo de conhecimento é fundamental para qualquer profissional da área de segurança da informação, pois mostra na prática como os protocolos funcionam e quais são suas vulnerabilidades.
+
+No fim das contas, ficou claro que a segurança na web depende de uma série de fatores, desde a implementação correta dos protocolos até o entendimento das ameaças existentes. Esse projeto foi uma boa oportunidade para exercitar e aprofundar esses conhecimentos de forma aplicada e realista.
 
 ---
 
-# **4. Bibliográfia
+# **5. Referências Bibliográficas**
 Stallings, William. Cryptography and Network Security: Principles and Practice, Global Edition. Germany, Pearson Education, 2022.
+
+https://pt.wikipedia.org/wiki/Hyper_Text_Transfer_Protocol_Secure
+https://pt.wikipedia.org/wiki/Transport_Layer_Security
+https://www.cloudflare.com/pt-br/learning/ssl/transport-layer-security-tls/
+https://www.cloudflare.com/pt-br/learning/ssl/what-is-https/
