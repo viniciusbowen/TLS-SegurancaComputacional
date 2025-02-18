@@ -183,6 +183,8 @@ Agora o servidor está com conexões seguras na porta 4443.
 
 ### **Acessando o Servidor pelo Navegador**
 
+![Captura de tela 2025-02-17 221004](https://github.com/user-attachments/assets/691a7bb4-5591-4b1e-b09f-36913c043ad1)
+
 1. Abra um navegador e acesse: `https://localhost:4443`
 
 2. Como o certificado é autoassinado, o navegador exibirá um aviso de segurança.
@@ -200,6 +202,7 @@ Instale o OpenSSL no site [slproweb.com](https://slproweb.com/products/Win32Open
 ```sh
 openssl x509 -in cert.pem -text -noout
 ```
+![image](https://github.com/user-attachments/assets/f742a9c1-5f20-4281-8a21-1cb493c0126b)
 
 ### **Wireshark: Analisando o Tráfego TLS**
 
@@ -250,9 +253,17 @@ Conclusão:
 
 # **2.5. Preenchimento dos Campos do Certificado**
 
-[IMAGEM DO CERTIFICADO PRINT DA TELA DO NAVEGADOR]
+![image](https://github.com/user-attachments/assets/ceac4377-38f5-40b1-9855-9049e2f5f68a)
+
+![image](https://github.com/user-attachments/assets/123e23f1-fad2-4862-8165-a5e686738484)
+![image](https://github.com/user-attachments/assets/bd0d6882-5d86-4eba-9f11-dff5338fcb94)
+![image](https://github.com/user-attachments/assets/0aca778a-358d-46e7-bf3c-ebcbb8e9175d)
+![image](https://github.com/user-attachments/assets/bd1b7346-5e7f-481d-a194-8e549e67f119)
+![image](https://github.com/user-attachments/assets/c5cfdb90-49b8-4184-a3a2-4b33a934e640)
 
 Ao criar um certificado digital, diversos campos podem ser preenchidos para garantir a correta identificação da entidade proprietária do certificado. Esses campos são essenciais para assegurar autenticidade e confiança na comunicação segura. Abaixo, explicamos os principais campos e sua importância:
+
+![Captura de tela 2025-02-17 221820](https://github.com/user-attachments/assets/55e63add-b9c3-4fbc-9403-6a6053c0aebb)
 
 - **C = Country (País)** → Indica o país onde a organização ou entidade está registrada. Exemplo: `BR` para Brasil.
 - **ST = State/Province (Estado ou Província)** → Especifica o estado ou província dentro do país. Exemplo: `Distrito Federal`.
@@ -260,10 +271,14 @@ Ao criar um certificado digital, diversos campos podem ser preenchidos para gara
 - **O = Organization (Organização)** → Nome da empresa ou entidade proprietária do certificado. Exemplo: `Universidade de Brasília`.
 - **OU = Organizational Unit (Unidade Organizacional)** → Usado para definir um departamento dentro da organização. Exemplo: `TI`.
 - **CN = Common Name (Nome Comum)** → Define o domínio ou nome da entidade que usará o certificado. Exemplo: `localhost` ou `sti.unb.br`.
+  
+![Captura de tela 2025-02-17 221726](https://github.com/user-attachments/assets/79cd403c-46a7-4986-bff5-1b898b00e307)
 
 Como este é um trabalho da disciplina de segurança computacional, o certificado gerado não é válido para HTTPS em um ambiente real. Para que um certificado seja considerado válido, ele deve ser emitido por uma Autoridade Certificadora (CA) confiável, como a ICP-Brasil no Brasil ou a DigiCert internacionalmente. Cada navegador vem de fábrica com uma lista de autoridades certificadoras confiáveis e verifica a autenticidade do certificado através do protocolo TLS. Isso garante que o site acessado pelo usuário é certificado e que o tráfego é criptografado utilizando TLS e RSA, assegurando a confidencialidade e integridade dos dados transmitidos.
 
 Os certificados TLS são fundamentais para a segurança na web. Eles são usados para estabelecer conexões seguras entre clientes e servidores, garantindo que os dados transmitidos sejam criptografados e protegidos contra interceptações. Um certificado TLS contém informações sobre a identidade do servidor, a chave pública usada para criptografia e a assinatura digital da CA que emitiu o certificado. Quando um navegador se conecta a um site HTTPS, ele verifica o certificado apresentado pelo servidor contra a lista de CAs confiáveis. Se o certificado for válido, a conexão segura é estabelecida, permitindo a troca de dados de forma segura e protegida.
+
+
 
 ---
 
