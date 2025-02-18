@@ -176,7 +176,7 @@ No código fornecido, a biblioteca `cryptography` é utilizada para gerar uma ch
 Para rodar o servidor HTTPS, execute o seguinte comando no terminal dentro do diretório onde o script Python está salvo:
 
 ```sh
-python nome_do_arquivo.py
+python trabalho2-Segurança.py
 ```
 
 Isso iniciará o servidor e exibirá uma mensagem confirmando sua execução:
