@@ -81,7 +81,7 @@ O HTTPS evoluiu junto com os protocolos SSL e TLS, adotando as melhorias de cada
 A comunicação segura entre um cliente e um servidor HTTPS envolve a troca de informações criptografadas utilizando o protocolo TLS. O fluxo básico dessa comunicação é:
 
 1. O cliente estabelece conexão com o servidor via HTTPS.
-2. O servidor apresenta seu certificado digital (SSL/TLS).
+2. O servidor apresenta seu certificado digital (SSL/TTLS).
 3. O cliente verifica a autenticidade do certificado.
 4. O cliente e o servidor realizam um handshake TLS para troca de chaves seguras.
 5. A comunicação entre cliente e servidor ocorre de forma criptografada.
@@ -189,7 +189,7 @@ Agora o servidor está com conexões seguras na porta 4443.
 
 1. Abra um navegador e acesse: `https://localhost:4443`
 
-2.Como o certificado é autoassinado, o navegador exibirá um aviso de segurança.
+2. Como o certificado é autoassinado, o navegador exibirá um aviso de segurança.
 
 3. Clique em **Avançado** e prossiga para o site.
 
@@ -197,13 +197,13 @@ Agora o servidor está com conexões seguras na porta 4443.
 
 ### **Instalação do OpenSSL**
 
-Instalando o OpenSSL no site https://slproweb.com/products/Win32OpenSSL.html e baixe a versão "Win64 OpenSSL v3.4.1 Light":
-- Com o OpenSSL instalado, abrimos o programa pelo com terminal Wind64 próprio:
-- Digitamos o comando abaixo, no diretório onde está implementado o servidor, para verificar a criação dos certificados na etapa anterior:
-```
+Instale o OpenSSL no site [slproweb.com](https://slproweb.com/products/Win32OpenSSL.html) e baixe a versão "Win64 OpenSSL v3.4.1 Light":
+- Com o OpenSSL instalado, abra o terminal do programa (Win64 OpenSSL Command Prompt).
+- Digite o comando abaixo, no diretório onde está implementado o servidor, para verificar a criação dos certificados na etapa anterior:
+
+```sh
 openssl x509 -in cert.pem -text -noout
 ```
-[IMAGEM]
 
 ### **Wireshark: Analisando o Tráfego TLS**
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho 2 - TLS</title>
+    <link rel="icon" href="lock-icon-clipart-free-png.webp" type="image/webp">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            flex-direction: column;
+            animation: fadeIn 2s ease-in-out;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            animation: slideIn 1s ease-in-out;
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            animation: slideIn 1.5s ease-in-out;
+        }
+        .inspirational {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #e50914;
+            animation: slideIn 2s ease-in-out;
+            font-family: 'Rubik', sans-serif;
+        }
+        .image-container {
+            max-height: 60vh;
+            margin-bottom: 1em;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .image-container img {
+            max-height: 100%;
+            width: auto;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="darcyribeirodivulgacao.webp" alt="Imagem Exemplo">
+    </div>
+    <div>
+        <h2 class="inspirational">"Coragem! Mais vale errar, se arrebentando, do que poupar-se para nada." - Darcy Ribeiro</h2>
+        <br>
+        <p>Página Segura criptografada com tecnologia TLS </p>
+        <p>Gerada por um servidor HTTPS.</p>
+        <p>🔒</p>
+    </div>
+</body>
+</html>
