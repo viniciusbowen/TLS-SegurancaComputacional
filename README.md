@@ -257,8 +257,6 @@ Conclusão:
 
 ![image](https://github.com/user-attachments/assets/123e23f1-fad2-4862-8165-a5e686738484)
 ![image](https://github.com/user-attachments/assets/bd0d6882-5d86-4eba-9f11-dff5338fcb94)
-![image](https://github.com/user-attachments/assets/0aca778a-358d-46e7-bf3c-ebcbb8e9175d)
-![image](https://github.com/user-attachments/assets/bd1b7346-5e7f-481d-a194-8e549e67f119)
 ![image](https://github.com/user-attachments/assets/c5cfdb90-49b8-4184-a3a2-4b33a934e640)
 
 Ao criar um certificado digital, diversos campos podem ser preenchidos para garantir a correta identificação da entidade proprietária do certificado. Esses campos são essenciais para assegurar autenticidade e confiança na comunicação segura. Abaixo, explicamos os principais campos e sua importância:
