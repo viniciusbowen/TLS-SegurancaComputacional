@@ -14,6 +14,7 @@ subject = issuer = x509.Name([
     x509.NameAttribute(x509.NameOID.STATE_OR_PROVINCE_NAME, "Distrito Federal"),
     x509.NameAttribute(x509.NameOID.LOCALITY_NAME, "Brasília"),
     x509.NameAttribute(x509.NameOID.ORGANIZATION_NAME, "Universidade de Brasília"),
+    x509.NameAttribute(x509.NameOID.ORGANIZATIONAL_UNIT_NAME, "STI"),  
     x509.NameAttribute(x509.NameOID.COMMON_NAME, "sti.unb.br"),
 ])
 cert = (

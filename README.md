@@ -262,6 +262,9 @@ Conclusão:
 Ao criar um certificado digital, diversos campos podem ser preenchidos para garantir a correta identificação da entidade proprietária do certificado. Esses campos são essenciais para assegurar autenticidade e confiança na comunicação segura. Abaixo, explicamos os principais campos e sua importância:
 
 ![Captura de tela 2025-02-17 221820](https://github.com/user-attachments/assets/55e63add-b9c3-4fbc-9403-6a6053c0aebb)
+### **Protocolo X.509**
+
+O protocolo X.509 é um padrão para a infraestrutura de chave pública (PKI) utilizado na emissão de certificados digitais. Esses certificados são essenciais para a implementação do TLS (Transport Layer Security) na web, garantindo a segurança das comunicações entre clientes e servidores. Um certificado X.509 contém informações como a chave pública do servidor, a identidade do proprietário (nome comum, organização, país, etc.), o período de validade e a assinatura digital de uma Autoridade Certificadora (CA) confiável. Quando um navegador se conecta a um site HTTPS, ele verifica o certificado X.509 apresentado pelo servidor para assegurar que a conexão é segura e que o servidor é autêntico. O uso de certificados X.509 é fundamental para estabelecer conexões seguras e proteger os dados transmitidos na web.
 
 - **C = Country (País)** → Indica o país onde a organização ou entidade está registrada. Exemplo: `BR` para Brasil.
 - **ST = State/Province (Estado ou Província)** → Especifica o estado ou província dentro do país. Exemplo: `Distrito Federal`.
