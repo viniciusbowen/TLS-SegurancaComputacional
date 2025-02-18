@@ -2,7 +2,6 @@
 DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO\
 DISCIPLINA DE SEGURANÇA DA COMPUTACIONAL- 2024.2
 
-
 # TRABALHO PRÁTICO 2 - protocol HTTPS over TLS
 MEMBROS:\
 _VINÍCIUS BOWEN - 180079239_\
@@ -40,10 +39,9 @@ A segurança na comunicação entre cliente e servidor é um dos principais desa
 
 ## **1.1. Detalhamento do HTTPS, SSL e TLS**
 
-## **SSL (Secure Sockets Layer) e TLS (Transport Layer Security)**
+### **SSL (Secure Sockets Layer) e TLS (Transport Layer Security)**
 
-O SSL e seu sucessor, TLS, são protocolos essenciais para garantir a segurança das comunicações na internet. Eles utilizam criptografia para proteger dados transmitidos entre clientes e servidores, impedindo que terceiros acessem informações sensíveis como senhas e dados financeiros.
-O TLS surgiu como sua evolução, aprimorando a segurança e corrigindo vulnerabilidades.
+O SSL e seu sucessor, TLS, são protocolos essenciais para garantir a segurança das comunicações na internet. Eles utilizam criptografia para proteger dados transmitidos entre clientes e servidores, impedindo que terceiros acessem informações sensíveis como senhas e dados financeiros. O TLS surgiu como sua evolução, aprimorando a segurança e corrigindo vulnerabilidades.
 
 Os principais objetivos desses protocolos são:
 - **Confidencialidade**: Utilizam criptografia simétrica e assimétrica para evitar que os dados sejam interceptados.
@@ -81,7 +79,7 @@ O HTTPS evoluiu junto com os protocolos SSL e TLS, adotando as melhorias de cada
 A comunicação segura entre um cliente e um servidor HTTPS envolve a troca de informações criptografadas utilizando o protocolo TLS. O fluxo básico dessa comunicação é:
 
 1. O cliente estabelece conexão com o servidor via HTTPS.
-2. O servidor apresenta seu certificado digital (SSL/TTLS).
+2. O servidor apresenta seu certificado digital (SSL/TLS).
 3. O cliente verifica a autenticidade do certificado.
 4. O cliente e o servidor realizam um handshake TLS para troca de chaves seguras.
 5. A comunicação entre cliente e servidor ocorre de forma criptografada.
@@ -150,7 +148,6 @@ httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
 print("Servidor HTTPS rodando em https://localhost:4443")
 httpd.serve_forever()
 ```
-2.3. Implementação Prática e Explicação do Código
 
 ### **Instalação da Biblioteca `cryptography`**
 
@@ -184,7 +181,6 @@ Servidor HTTPS rodando em https://localhost:4443
 
 Agora o servidor está com conexões seguras na porta 4443.
 
-
 ### **Acessando o Servidor pelo Navegador**
 
 1. Abra um navegador e acesse: `https://localhost:4443`
@@ -217,27 +213,38 @@ Para analisar o tráfego TLS utilizando o Wireshark, siga as instruções abaixo
 
 #### **Capturando o Tráfego TLS na Porta 4443**
 
-1. Abra o Wireshark.
-2. Na tela inicial, selecione a interface de rede que está sendo utilizada para a comunicação (por exemplo, Ethernet ou Wi-Fi).
-3. Clique em "Start" para iniciar a captura de pacotes.
-4. No campo de filtro, digite `tcp.port == 4443` para filtrar apenas o tráfego na porta 4443.
-5. Acesse o servidor HTTPS configurado anteriormente em `https://localhost:4443` através do navegador.
-6. Realize algumas interações com o servidor para gerar tráfego TLS.
+**Resumo da Análise de Tráfego HTTPS com Wireshark**
 
-#### **Analisando o Handshake TLS**
+1. **Identificação da Interface de Loopback**
+   - Utilize o "Npcap Loopback Adapter" para capturar esse tráfego.
 
-1. No Wireshark, pare a captura clicando no botão "Stop".
-2. Procure por pacotes que contenham "Client Hello" e "Server Hello" no campo "Info". Esses pacotes fazem parte do handshake TLS.
-3. Clique em um pacote "Client Hello" para visualizar os detalhes do handshake, incluindo as versões de TLS suportadas e as cifras criptográficas.
-4. Clique em um pacote "Server Hello" para ver a resposta do servidor, incluindo a cifra selecionada e o certificado digital.
+2. **Acessar o Servidor HTTPS**
+   - Com a captura rodando, acesse no navegador: `https://localhost:4443`.
+   - O Wireshark começará a registrar os pacotes HTTPS.
 
-#### **Verificando a Comunicação Criptografada**
+4. **Aplicar Filtros para Focar no Tráfego TLS**
+   - Filtrar todo o tráfego TLS: `tls`
+   - Filtrar pela porta 4443: `tcp.port == 4443`
+   - Para visualizar o handshake, busque pacotes como "Client Hello", "Server Hello" e "Certificate".
+   - Para acompanhar a comunicação completa, clique com o botão direito em um pacote → "Follow" → "TLS Stream".
 
-1. Após o handshake, observe os pacotes de "Application Data". Esses pacotes contêm dados criptografados trocados entre o cliente e o servidor.
-2. Para verificar a integridade e confidencialidade dos dados, observe que o conteúdo dos pacotes de "Application Data" não é legível, indicando que a comunicação está criptografada.
+5. **Observando o Handshake TLS**
+   - O handshake define a versão do protocolo, algoritmos de criptografia e troca de certificados.
+   - No Wireshark, selecione um pacote "Client Hello" ou "Server Hello" e expanda:
+     - **Transport Layer Security** → **Handshake Protocol**
+   - Verifique a versão do TLS (ex.: TLS 1.2 ou 1.3) e as cifras negociadas.
 
-Utilizando o Wireshark, é possível visualizar e analisar o processo de handshake TLS e a comunicação criptografada, garantindo que o servidor HTTPS está funcionando corretamente e que os dados transmitidos estão protegidos.
+6. **Verificando os Dados Criptografados**
+   - Após o handshake, os dados HTTP são criptografados.
+   - Pacotes de "Application Data" no Wireshark contêm apenas bytes aparentemente aleatórios.
+   - Não é possível visualizar requisições HTTP como GET ou POST em texto claro.
+   - Isso confirma que a comunicação está protegida por TLS e que terceiros não podem acessar os dados sem a chave de descriptografia.
 
+Análise dos Dados:
+    Ao clicar e expandir um desses pacotes, você perceberá que a seção de dados criptografados não apresenta os cabeçalhos HTTP (como GET, POST, etc.) e nem o corpo da mensagem em formato legível. Essa ausência de informações em texto claro indica que os dados foram criptografados conforme o esperado.
+
+Conclusão:
+    O fato de os pacotes “Application Data” não exibirem conteúdo em texto plano é uma evidência de que a comunicação está protegida pelo TLS, garantindo que mesmo que alguém intercepte os pacotes, não poderá ler as informações sem a chave de descriptografia.
 
 ---
 
@@ -263,3 +270,6 @@ Os certificados TLS são fundamentais para a segurança na web. Eles são usados
 # **3. Conclusão e Análise Final**
 
 A implementação do HTTPS melhora significativamente a segurança das aplicações web, garantindo a confidencialidade, integridade e autenticidade dos dados. Apesar dos desafios na configuração e implementação, o uso de certificados autoassinados permitiu um entendimento mais aprofundado sobre a criptografia na web. Futuramente, melhorias como a integração com autoridades certificadoras podem ser exploradas para aumentar a confiabilidade da solução.
+
+# **4. Bibliográfia
+Stallings, William. Cryptography and Network Security: Principles and Practice, Global Edition. Germany, Pearson Education, 2022.
