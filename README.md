@@ -236,12 +236,16 @@ Para analisar o tráfego TLS utilizando o Wireshark, siga as instruções abaixo
    - No Wireshark, selecione um pacote "Client Hello" ou "Server Hello" e expanda:
      - **Transport Layer Security** → **Handshake Protocol**
    - Verifique a versão do TLS (ex.: TLS 1.2 ou 1.3) e as cifras negociadas.
+     
+![Captura de tela 2025-02-17 215148](https://github.com/user-attachments/assets/bbd1c0cf-3003-41f4-9081-df47ce805da2)
 
 6. **Verificando os Dados Criptografados**
    - Após o handshake, os dados HTTP são criptografados.
    - Pacotes de "Application Data" no Wireshark contêm apenas bytes aparentemente aleatórios.
    - Não é possível visualizar requisições HTTP como GET ou POST em texto claro.
    - Isso confirma que a comunicação está protegida por TLS e que terceiros não podem acessar os dados sem a chave de descriptografia.
+
+![Captura de tela 2025-02-17 220930](https://github.com/user-attachments/assets/96a2fd6f-d0ab-4caf-b76e-6ae9b8fa720e)
 
 Análise dos Dados:
     Ao clicar e expandir um desses pacotes, você perceberá que a seção de dados criptografados não apresenta os cabeçalhos HTTP (como GET, POST, etc.) e nem o corpo da mensagem em formato legível. Essa ausência de informações em texto claro indica que os dados foram criptografados conforme o esperado.
@@ -254,9 +258,7 @@ Conclusão:
 # **2.5. Preenchimento dos Campos do Certificado**
 
 ![image](https://github.com/user-attachments/assets/ceac4377-38f5-40b1-9855-9049e2f5f68a)
-
-![image](https://github.com/user-attachments/assets/123e23f1-fad2-4862-8165-a5e686738484)
-![image](https://github.com/user-attachments/assets/bd0d6882-5d86-4eba-9f11-dff5338fcb94)
+![image](https://github.com/user-attachments/assets/bc0d719c-491a-4ce0-80bd-a94b68b92cd5)
 ![image](https://github.com/user-attachments/assets/c5cfdb90-49b8-4184-a3a2-4b33a934e640)
 
 Ao criar um certificado digital, diversos campos podem ser preenchidos para garantir a correta identificação da entidade proprietária do certificado. Esses campos são essenciais para assegurar autenticidade e confiança na comunicação segura. Abaixo, explicamos os principais campos e sua importância:
